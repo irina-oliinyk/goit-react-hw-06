@@ -1,10 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
 import { useId } from 'react';
 
-export default function ContactForm({ addContact }) {
+const initialValues = {
+  username: '',
+  usernumber: '',
+};
+
+export default function ContactForm() {
+  const dispatch = useDispatch();
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Too Short!')
@@ -17,18 +25,17 @@ export default function ContactForm({ addContact }) {
   });
 
   const id = useId();
-  const initialValues = {
-    name: '',
-    number: '',
-    id,
-  };
+
   const handleSubmit = (values, actions) => {
-    console.log(values);
-    initialValues.id = nanoid();
-    addContact(values);
+    const newContact = {
+      id: nanoid(),
+      name: values.username,
+      number: values.usernumber,
+    };
+
+    dispatch(addContact(newContact));
     actions.resetForm();
   };
-
   return (
     <>
       <Formik

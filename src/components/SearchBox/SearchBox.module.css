@@ -1,5 +1,8 @@
 .container {
   padding-left: 40px;
+  /* margin: auto; */
+  text-align: center;
+  margin-top: 15px;
 }
 
 .paragraf {

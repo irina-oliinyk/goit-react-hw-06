@@ -2,6 +2,9 @@
   border: 1px solid springgreen;
   width: 400px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .div {

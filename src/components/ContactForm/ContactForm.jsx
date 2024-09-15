@@ -27,12 +27,22 @@ export default function ContactForm() {
   };
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
-    initialValues.id = nanoid();
-
-    dispatch(addContact(values));
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    };
+    dispatch(addContact(newContact));
     actions.resetForm();
   };
+
+  // const handleSubmit = (values, actions) => {
+  //   console.log(values);
+  //   initialValues.id = nanoid();
+
+  //   dispatch(addContact(values));
+  //   actions.resetForm();
+  // };
   return (
     <>
       <Formik
